@@ -9,7 +9,11 @@
   "keywords": [
     "namecoin"
   ],
-  "author": "Indolering",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/indolering/nmc.js.git"
+  },
+  "author": "Zachary Lym <zachlym@indolering.com> (indolering.com)",
   "license": "APGLv3",
   "devDependencies": {},
   "dependencies": {

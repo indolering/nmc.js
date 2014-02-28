@@ -22,11 +22,14 @@ function nmc(c) {
 
   this.blockCount = function() {
     return new Promise(function(resolve, reject) {
-      that.client.getBlockCount(function(err, value) {
+//      that.client.getBlockCount(function(err, value) {
+
+      that.client.getInfo(function(err, value) {
         if (err) {
           console.log(err);
           reject(err);
         } else {
+          console.log(value);
           resolve(value);
         }
       });
@@ -150,7 +153,7 @@ function nmc(c) {
  * */
 /**
  * Initializes connection after searching for config files
- * @param {?config} config Object with settings.
+ * @param {?(config | string)} config Object with settings.
  * @returns {function}
  * TODO: refactor this spaghetti shit.
  */
@@ -158,74 +161,76 @@ exports.init = function(config) {
 
   return new Promise(function(resolve) {
 
-    if (config) {     //if config files were provided init
-      finish(config);
-    } else {
+    if (typeof config === 'undefined') {
+      {
+        //TODO: add OS X:
+        //"/Users/USERNAME/Library/Application Support/Namecoin/namecoin.conf"
+        try {
+          fs.readFile(process.env.HOME + '/.namecoin/namecoin.conf', 'utf-8',
+            function(err, data) {
+              if (err) {
+                throw err
+              } else {
+                var tempConf = data.split(/\f|\n|\r/);
+                var tempJson = {};
 
-      fs.readFile('settings.json', 'utf8', function(err, data) {
-        if (!err) {
-          finish(data);
+                tempConf.forEach(function(line) {
+                  line = line.split;
+                  tempJson[line[0]] = line[1];
+                });
 
-        } else {
+                var config = {
+                  host: 'localhost',
+                  port: 8334,
+                  user: '',
+                  pass: ''
+                };
 
-          try {
-            fs.readFile(process.env.HOME + '/.namecoin/namecoin.conf', 'utf-8',
-              function(err, data) {
-                if (err) {
-                  throw err
-                } else {
-                  var tempConf = data.split(/\f|\n|\r/);
-                  var tempJson = {};
-
-                  tempConf.forEach(function(line) {
-                    line = line.split;
-                    tempJson[line[0]] = line[1];
-                  });
-
-                  var config = {
-                    host: 'localhost',
-                    port: 8334,
-                    user: '',
-                    pass: ''
-                  };
-
-                  if (tempJson.host) {
-                    config.host = tempJson.host;
-                  }
-                  if (tempJson.rpcport) {
-                    config.port = tempJson.rpcport;
-                  }
-                  if (tempJson.rpcuser) {
-                    config.user = tempJson.rpcuser;
-                  }
-                  if (tempJson.rpcpassword) {
-                    config.pass = tempJson.rpcpassword;
-                  }
-
-
-                  finish(tempJson);
+                if (tempJson.host) {
+                  config.host = tempJson.host;
                 }
-              });
-          } catch (e) {
-            if (debug) {
-              console.log("Error when reading system config file," +
-                " using default config with no username/password.", e);
-            }
-            config = {
-              host: 'localhost',
-              port: 8334,
-              user: '',
-              pass: ''
-            };
-            finish(config);
+                if (tempJson.rpcport) {
+                  config.port = tempJson.rpcport;
+                }
+                if (tempJson.rpcuser) {
+                  config.user = tempJson.rpcuser;
+                }
+                if (tempJson.rpcpassword) {
+                  config.pass = tempJson.rpcpassword;
+                }
+                connect(tempJson);
+              }
+            });
+        } catch (e) {
+          if (debug) {
+            console.log("Error when reading system config file," +
+              " using default config with no username/password.", e);
           }
+          config = {
+            host: 'localhost',
+            port: 8334,
+            user: '',
+            pass: ''
+          };
+          connect(config);
+        }
+      }
+    } else if(config.isObject()) {
+      connect(data);
+    } else { //assume it's a string to filepath
+
+      fs.readFile(config, 'utf8', function(err, data) {
+        if (!err) {
+          connect(data);
+        } else {
+          throw err;
         }
       });
 
     }     //look for config files and then init
 
 
-    function finish(conf) {
+    function connect(conf) {
       if (!conf.isObject()) {
         conf = JSON.parse(conf);
       }
