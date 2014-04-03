@@ -15,10 +15,21 @@
   },
   "author": "Zachary Lym <zachlym@indolering.com> (indolering.com)",
   "license": "APGLv3",
-  "devDependencies": {},
+  "devDependencies": {
+    "gulp": "^3.5.6",
+    "dnode": "^1.2.0",
+    "chai": "^1.9.1",
+    "mocha": "^1.18.2",
+    "gulp-rename": "^1.2.0",
+    "gulp-util": "^2.2.14",
+    "gulp-uglify": "^0.2.1",
+    "gulp-inlining-node-require": "0.0.2",
+    "gulp-concat": "^2.2.0"
+  },
   "dependencies": {
     "namecoin": "^0.1.4",
     "es6-promise": "^0.1.1",
-    "sugar": "^1.4.1"
+    "sugar": "^1.4.1",
+    "ps-node": "0.0.3"
   }
 }

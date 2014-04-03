@@ -1,0 +1,9 @@
+{
+  "host": "testhost",
+  "port": 666,
+  "user": "testuser",
+  "pass": "testpass",
+  "ssl": true,
+  "sslStrict": true,
+  "sslCa": "testsslCa"
+}
