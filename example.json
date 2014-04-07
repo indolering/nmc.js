@@ -1,0 +1,20 @@
+{
+  "name"       : "d/nf",
+  "value"      : {
+    "map"        : {
+      "": "94.23.252.190"
+    },
+    "fingerprint": ["14:7D:31:8D:52:CD:43:61:32:91:F1:81:1B:C5:B9:CB:7B:25:4C:71"]
+  }
+  "attachments": {
+    "metadata": {
+      "txid"      : "11bad911bfacf726932be4a2d8680d9cce6b1c60e0722c79d6bd8653cd7132c5",
+      "address"   : "N7CKB8hEP2YXZ6Zy5xaf8wbHmXLxB2kHk1",
+      "expires_in": 31451
+    },
+    "security": {
+      "sha256"  : "11bad911bfacf726932be4a2d8680d9cce6b1c60e0722c79d6bd8653cd7132c5",
+      "shake128": "N7CKB8hEP2YXZ6Zy5xaf8wbHmXLxB2kHk1"
+    }
+  }
+}

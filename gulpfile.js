@@ -9,7 +9,7 @@ var gutil = require('gulp-util');
 var uglify = require('gulp-uglify');
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
-var inlining = require('gulp-inlining-node-require');
+//var inlining = require('gulp-inlining-node-require');
 //
 //var watcher = gulp.watch('src/**/*.js', ['default']);
 //watcher.on('change', function(event) {
@@ -17,10 +17,8 @@ var inlining = require('gulp-inlining-node-require');
 //});
 
 gulp.task('default', function() {
-  gulp.src('./src/index.js')
-//    .pipe(concat('nmc.js'))
-    .pipe(inlining())
-    .pipe(rename('nmc.js'))
+  gulp.src('./src/*.js')
+    .pipe(concat('nmc.js'))
     .pipe(gulp.dest('./'))
 });
 
