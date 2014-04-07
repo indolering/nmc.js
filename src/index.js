@@ -37,7 +37,7 @@ function nmc(conf, resolve, reject) {
    */
   this.heart = {
     ping   : function() {
-      n.beat(n.client.blockCount().then(
+      n.beat(n.blockCount().then(
         function(result) {
           return true;
         },
@@ -107,7 +107,7 @@ function nmc(conf, resolve, reject) {
     return new Promise(function(resolve, reject) {
       //      that.client.getBlockCount(function(err, value) {
 
-      n.client.getInfo(function(err, value) {
+      n.client.getBlockCount(function(err, value) {
         if (err) {
           console.log(err);
           reject(err);
@@ -264,7 +264,7 @@ function nmc(conf, resolve, reject) {
     });
 
   };
-  n.client.blockCount()
+  n.blockCount()
     .then(function() {
       resolve(n);
   }).catch(function() {

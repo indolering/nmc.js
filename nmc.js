@@ -37,7 +37,7 @@ function nmc(conf, resolve, reject) {
    */
   this.heart = {
     ping   : function() {
-      n.beat(n.client.blockCount().then(
+      n.beat(n.blockCount().then(
         function(result) {
           return true;
         },
@@ -107,7 +107,7 @@ function nmc(conf, resolve, reject) {
     return new Promise(function(resolve, reject) {
       //      that.client.getBlockCount(function(err, value) {
 
-      n.client.getInfo(function(err, value) {
+      n.client.getBlockCount(function(err, value) {
         if (err) {
           console.log(err);
           reject(err);
@@ -264,7 +264,7 @@ function nmc(conf, resolve, reject) {
     });
 
   };
-  n.client.blockCount()
+  n.blockCount()
     .then(function() {
       resolve(n);
   }).catch(function() {
@@ -325,7 +325,7 @@ Object.extend();
  * @returns {Array.<Object>}
  * TODO: turn namespace (d/) into parameter
  */
-function cleanRecord(record) {
+exports.cleanRecord = function(record) {
   var name = record.name;
   var value = record.value;
 
@@ -355,7 +355,7 @@ function cleanRecord(record) {
 
 // removes all admins stuff
 // will (eventually) also remove all key/values which are not well formed.
-function scrubRecord(record) {
+exports.scrubRecord = function(record) {
   if (!record.value.isObject()) {
     record = cleanRecord(record);
   }
@@ -371,4 +371,4 @@ function scrubRecord(record) {
     }
   }
   return record;
-}
+};
