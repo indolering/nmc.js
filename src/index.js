@@ -264,13 +264,13 @@ function nmc(conf, resolve, reject) {
     });
 
   };
-  resolve(n);
-//  n.blockCount()
-//    .then(function() {
-//      resolve(n);
-//  }).catch(function() {
-//      reject(new Error("Namcoin did not respond to BlockCount"));
-//  })
+//  resolve(n);
+  n.blockCount()
+    .then(function() {
+      resolve(n);
+  }).catch(function() {
+      reject(new Error("Namcoin did not respond to BlockCount"));
+  })
 }
 
 function initConnection(conf) {

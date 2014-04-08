@@ -55,7 +55,7 @@ function nmc(conf, resolve, reject) {
     }
   };
 
-  setInterval(n.heart.ping, 1000);
+//  setInterval(n.heart.ping, 1000);
 
   /**
    * Prints and then returns list of processes with namecoin in the name.
@@ -264,6 +264,7 @@ function nmc(conf, resolve, reject) {
     });
 
   };
+//  resolve(n);
   n.blockCount()
     .then(function() {
       resolve(n);
@@ -273,6 +274,7 @@ function nmc(conf, resolve, reject) {
 }
 
 function initConnection(conf) {
+  conf = conf || {};
 
   conf.host = conf.host || '127.0.0.1';
   conf.port = conf.port || 8336;
