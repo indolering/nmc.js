@@ -37,7 +37,7 @@ function nmc(conf, resolve, reject) {
    */
   this.heart = {
     ping   : function() {
-      n.beat(n.blockCount().then(
+      n.heart.beat(n.blockCount().then(
         function(result) {
           return true;
         },
@@ -55,7 +55,7 @@ function nmc(conf, resolve, reject) {
     }
   };
 
-  setInterval(n.heart.ping, 1000);
+//  setInterval(n.heart.ping, 1000);
 
   /**
    * Prints and then returns list of processes with namecoin in the name.
@@ -264,15 +264,17 @@ function nmc(conf, resolve, reject) {
     });
 
   };
-  n.blockCount()
-    .then(function() {
-      resolve(n);
-  }).catch(function() {
-      reject(new Error("Namcoin did not respond to BlockCount"));
-  })
+  resolve(n);
+//  n.blockCount()
+//    .then(function() {
+//      resolve(n);
+//  }).catch(function() {
+//      reject(new Error("Namcoin did not respond to BlockCount"));
+//  })
 }
 
 function initConnection(conf) {
+  conf = conf || {};
 
   conf.host = conf.host || '127.0.0.1';
   conf.port = conf.port || 8336;

@@ -37,7 +37,7 @@ function nmc(conf, resolve, reject) {
    */
   this.heart = {
     ping   : function() {
-      n.beat(n.blockCount().then(
+      n.heart.beat(n.blockCount().then(
         function(result) {
           return true;
         },
